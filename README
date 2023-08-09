@@ -1,0 +1,100 @@
+Store and Product Information API Documentation
+The Store and Product Information API provides various endpoints for querying store and product-related information. The API is designed to centralize data from different sources and allow users to filter and retrieve relevant data.
+
+
+
+http://localhost:8080
+Authentication
+All endpoints require an API-Key header to be included in the request. You can obtain the API key from your interviewer.
+
+Endpoints
+1. List Available Filters
+Endpoint: GET /filters
+
+Returns a list of available filters that users can use to filter stores.
+
+
+GET /filters
+
+[
+  "Season",
+  "Cluster",
+  "Region",
+  "Region Type",
+  "Product Model",
+  "Product Size",
+  "Product SKU",
+  "Store Name",
+  "Store Theme"
+]
+2. Get Filter Values
+Endpoint: POST /filters/{filter_id}?page=X
+
+Lists possible values for a given filter based on the current filter set.
+
+#JSON INFORMATION CODE
+
+POST /filters/Region
+{
+  "filters": [
+    {
+      "id": "Cluster",
+      "values": ["Europe"]
+    }
+  ]
+}
+
+#JSON INFORMATION CODE
+
+["North EU", "South EU"]
+3. Filter Stores
+Endpoint: POST /stores?page=X
+
+Filters stores matching the given filters.
+
+
+POST /stores
+{
+  "filters": [
+    {
+      "id": "Season",
+      "values": ["S20"]
+    },
+    {
+      "id": "Region",
+      "values": ["North EU"]
+    },
+    {
+      "id": "SKU",
+      "values": ["120000777"]
+    }
+  ]
+}
+
+
+[
+  {
+    "name": "Store xyz",
+    "theme": "Store theme",
+    "region": "Store region",
+    "cluster": "Store cluster"
+  }
+]
+4. Update Store Name
+Endpoint: PATCH /stores/{store_name}
+
+Updates the name of a given store.
+
+4. Update Store Name
+Endpoint: PATCH /stores/{store_name}
+
+Updates the name of a given store.
+
+Example Request
+
+PATCH /stores/Store123
+{
+  "name": "New Store Name"
+}
+Response
+Status code: 200 OK

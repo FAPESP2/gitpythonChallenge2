@@ -1,0 +1,13 @@
+from utils import make_api_request
+
+API_BASE_URL = "http://localhost:8080"
+API_KEY = "your-api-key"
+
+# Make a GET request to an API endpoint
+response_data = make_api_request(
+    f"{API_BASE_URL}/clusters", headers={"API-Key": API_KEY}
+)
+
+if response_data:
+    # Process the response data
+    print(response_data)
